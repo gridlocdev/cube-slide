@@ -30,6 +30,12 @@ EditorBuildSettings:
     path: Assets/Level07.unity
     guid: 2df8adeb2a6546541bc2584fa105920c
   - enabled: 1
+    path: Assets/Level08.unity
+    guid: 4491f4387bc71c74da10c9458df237f6
+  - enabled: 1
+    path: Assets/Level09.unity
+    guid: 8d263545af8115242babf5df1d905f3e
+  - enabled: 1
     path: Assets/Credits.unity
     guid: c2a3e8c43547ccf4c8b5b27625dcbb7b
   - enabled: 1

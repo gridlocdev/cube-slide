@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Obstacle
   - BallReflector
+  - Thump1
+  - Thump2
   layers:
   - Default
   - TransparentFX
