@@ -16,7 +16,8 @@ public class PlayerCollision : MonoBehaviour
     {
         if (collisionInfo.collider.tag == "Obstacle" || 
             collisionInfo.collider.tag == "Thump1" || 
-            collisionInfo.collider.tag == "Thump2")
+            collisionInfo.collider.tag == "Thump2" ||
+            collisionInfo.collider.tag == "BallReflector")
         {
             hitSource.Play();
             movement.enabled = false;
