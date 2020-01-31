@@ -9,7 +9,6 @@ public class BallObstacleMovement : MonoBehaviour
 
     void OnEnable()
     {
-        Debug.Log("OnEnable called");
         rb.AddForce(sidewaysForce * Time.deltaTime * -3f, -10, 0, ForceMode.VelocityChange);
     }
     
@@ -18,7 +17,6 @@ public class BallObstacleMovement : MonoBehaviour
     {
         if (collisionInfo.collider.tag == "BallReflector")
         {
-            Debug.Log("Hit Obj!");
             if (collisionInfo.transform.localPosition.x > rb.transform.localPosition.x) {
                 rb.AddForce(sidewaysForce * Time.deltaTime * -3, -10, 0, ForceMode.VelocityChange);
             }
