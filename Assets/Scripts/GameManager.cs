@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject completeLevelUI;
 
         public PlayerMovement movement;
+    public PlayerCollision playerCollision;
 
     public void Start()
     {
@@ -17,7 +18,11 @@ public class GameManager : MonoBehaviour
 
     public void LevelComplete()
     {
+        // If cube has not collided; 
+        if (playerCollision.hasCollided != true)
+        {
         completeLevelUI.SetActive(true);
+        }
     }
 
     public void EndGame()

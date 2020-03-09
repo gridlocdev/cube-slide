@@ -48,3 +48,5 @@ MonoBehaviour:
     type: 3}
   movement: {fileID: 6878551619518874753, guid: e65c801a07c5289428420f981f795d2c,
     type: 3}
+  playerCollision: {fileID: 6878551619518874752, guid: e65c801a07c5289428420f981f795d2c,
+    type: 3}

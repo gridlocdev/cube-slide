@@ -5,6 +5,8 @@ public class PlayerCollision : MonoBehaviour
 {
     public PlayerMovement movement;
 
+    public bool hasCollided = false;
+
     public AudioSource hitSource;
 
     void Start()
@@ -21,6 +23,7 @@ public class PlayerCollision : MonoBehaviour
         {
             hitSource.Play();
             movement.enabled = false;
+            hasCollided = true;
             FindObjectOfType<GameManager>().EndGame();
         }
     }

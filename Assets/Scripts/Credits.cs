@@ -5,7 +5,14 @@ public class Credits : MonoBehaviour
 {
     public void ExitGame()
     {
-        Application.Quit();
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            SceneManager.LoadScene(0);
+        }
+        else
+        {
+            Application.Quit();
+        }
     }
 
     public void BonusLevels()
