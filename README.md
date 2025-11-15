@@ -6,4 +6,4 @@ Welcome to Cube Slide, my first game built with the Unity game engine.
 
 Maneuver around the obstacles and make your way to the goal!
 
-**[Click here to play!](https://gridlocdev.github.io/cube-slide)**
+**[Click here to play!](https://gridloc.dev/games/cube-slide)**
