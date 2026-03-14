@@ -97,6 +97,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			pause()
 
 func pause() -> void:
+	if GameManager.game_has_ended:
+		return
 	visible = true
 	get_tree().paused = true
 

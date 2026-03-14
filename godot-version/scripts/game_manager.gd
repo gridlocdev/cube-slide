@@ -34,6 +34,7 @@ func end_game() -> void:
 
 func _restart() -> void:
 	game_has_ended = false
+	get_tree().paused = false
 	get_tree().reload_current_scene()
 
 func load_next_level() -> void:
