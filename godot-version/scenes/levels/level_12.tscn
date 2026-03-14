@@ -1,0 +1,376 @@
+[gd_scene load_steps=17 format=3]
+
+[ext_resource type="PackedScene" path="res://prefabs/player.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://prefabs/end_goal.tscn" id="2"]
+[ext_resource type="PackedScene" path="res://prefabs/end_trigger.tscn" id="3"]
+[ext_resource type="Script" path="res://scripts/follow_camera.gd" id="4"]
+[ext_resource type="Script" path="res://scripts/score.gd" id="5"]
+[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="6"]
+[ext_resource type="Script" path="res://scripts/level_complete_ui.gd" id="7"]
+[ext_resource type="PackedScene" path="res://prefabs/obstacle.tscn" id="8"]
+[ext_resource type="PackedScene" path="res://prefabs/ball_reflector.tscn" id="9"]
+[ext_resource type="PackedScene" path="res://prefabs/ball.tscn" id="10"]
+
+[sub_resource type="BoxMesh" id="ground_mesh"]
+size = Vector3(15, 1, 10000)
+
+[sub_resource type="StandardMaterial3D" id="ground_mat"]
+albedo_color = Color(1, 1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="ground_shape"]
+size = Vector3(15, 1, 10000)
+
+[sub_resource type="Environment" id="env"]
+background_mode = 1
+background_color = Color(0.784, 0.784, 0.784, 1)
+fog_enabled = true
+fog_light_color = Color(0.784, 0.784, 0.784, 1)
+fog_density = 0.005
+
+[sub_resource type="LabelSettings" id="score_ls"]
+font_size = 32
+font_color = Color(0.1, 0.1, 0.1, 1)
+
+[sub_resource type="LabelSettings" id="lc_ls"]
+font_size = 48
+font_color = Color(0.1, 0.1, 0.1, 1)
+
+[node name="Level12" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("env")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, 0, 10, 10)
+
+[node name="Ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -4980)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
+mesh = SubResource("ground_mesh")
+material_override = SubResource("ground_mat")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+shape = SubResource("ground_shape")
+
+[node name="Player" parent="." instance=ExtResource("1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+script = ExtResource("4")
+target = NodePath("../Player")
+offset = Vector3(0, 3, 8)
+
+[node name="EndGoal" parent="." instance=ExtResource("2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -850)
+
+[node name="EndTrigger" parent="." instance=ExtResource("3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -859)
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="ScoreLabel" type="Label" parent="HUD"]
+anchors_preset = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 200.0
+offset_bottom = 60.0
+text = "0%"
+label_settings = SubResource("score_ls")
+script = ExtResource("5")
+player_path = NodePath("../../Player")
+end_trigger_z = -859.0
+
+[node name="LevelCompleteUI" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("7")
+
+[node name="Panel" type="Panel" parent="HUD/LevelCompleteUI"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -80.0
+offset_right = 150.0
+offset_bottom = 80.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="HUD/LevelCompleteUI/Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+theme_override_constants/separation = 15
+
+[node name="Label" type="Label" parent="HUD/LevelCompleteUI/Panel/VBox"]
+layout_mode = 2
+text = "Level Complete!"
+label_settings = SubResource("lc_ls")
+horizontal_alignment = 1
+
+[node name="NextLevelButton" type="Button" parent="HUD/LevelCompleteUI/Panel/VBox"]
+layout_mode = 2
+text = "Next Level"
+
+[node name="PauseMenu" type="Control" parent="HUD"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("6")
+
+[node name="PausePanel" type="Panel" parent="HUD/PauseMenu"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -100.0
+offset_right = 120.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBox" type="VBoxContainer" parent="HUD/PauseMenu/PausePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = -10.0
+offset_bottom = -10.0
+theme_override_constants/separation = 10
+
+[node name="PausedLabel" type="Label" parent="HUD/PauseMenu/PausePanel/VBox"]
+layout_mode = 2
+text = "Paused"
+horizontal_alignment = 1
+
+[node name="ResumeButton" type="Button" parent="HUD/PauseMenu/PausePanel/VBox"]
+layout_mode = 2
+text = "Resume"
+
+[node name="RestartButton" type="Button" parent="HUD/PauseMenu/PausePanel/VBox"]
+layout_mode = 2
+text = "Restart"
+
+[node name="MainMenuButton" type="Button" parent="HUD/PauseMenu/PausePanel/VBox"]
+layout_mode = 2
+text = "Main Menu"
+
+[node name="Obstacle1" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -50)
+
+[node name="Obstacle2" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -250)
+
+[node name="Obstacle3" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, -350)
+
+[node name="Obstacle4" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -350)
+
+[node name="Obstacle5" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -50)
+
+[node name="Obstacle6" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, -50)
+
+[node name="Obstacle7" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -50)
+
+[node name="Obstacle8" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -250)
+
+[node name="Obstacle9" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -350)
+
+[node name="Obstacle10" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, -350)
+
+[node name="Obstacle11" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -250)
+
+[node name="Obstacle12" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, -150)
+
+[node name="Obstacle13" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -250)
+
+[node name="Obstacle14" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 1, -150)
+
+[node name="Obstacle15" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, -250)
+
+[node name="Obstacle16" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -150)
+
+[node name="Obstacle17" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 1, -150)
+
+[node name="Obstacle18" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -350)
+
+[node name="Obstacle19" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -50)
+
+[node name="Obstacle20" parent="." instance=ExtResource("8")]
+transform = Transform3D(4, 0, 0, 0, 10, 0, 0, 0, 3, -5, 6, -850)
+
+[node name="Obstacle21" parent="." instance=ExtResource("8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -150)
+
+[node name="BallReflector1" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -650)
+
+[node name="BallReflector2" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -510)
+
+[node name="BallReflector3" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -680)
+
+[node name="BallReflector4" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -300)
+
+[node name="BallReflector5" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -520)
+
+[node name="BallReflector6" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -300)
+
+[node name="BallReflector7" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -200)
+
+[node name="BallReflector8" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -568)
+
+[node name="BallReflector9" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -640)
+
+[node name="BallReflector10" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -630)
+
+[node name="BallReflector11" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -520)
+
+[node name="BallReflector12" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -100)
+
+[node name="BallReflector13" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -510)
+
+[node name="BallReflector14" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -700)
+
+[node name="BallReflector15" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -700)
+
+[node name="BallReflector16" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -548)
+
+[node name="BallReflector17" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -500)
+
+[node name="BallReflector18" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -640)
+
+[node name="BallReflector19" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -630)
+
+[node name="BallReflector20" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -558)
+
+[node name="BallReflector21" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -690)
+
+[node name="BallReflector22" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -680)
+
+[node name="BallReflector23" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -690)
+
+[node name="BallReflector24" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -100)
+
+[node name="BallReflector25" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -558)
+
+[node name="BallReflector26" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -568)
+
+[node name="BallReflector27" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -500)
+
+[node name="BallReflector28" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 2, -200)
+
+[node name="BallReflector29" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -548)
+
+[node name="BallReflector30" parent="." instance=ExtResource("9")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 2, -650)
+
+[node name="Ball1" parent="." instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -630)
+
+[node name="Ball2" parent="." instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -200)
+
+[node name="Ball3" parent="." instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -100)
+
+[node name="Ball4" parent="." instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -558)
+
+[node name="Ball5" parent="." instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -568)
+
+[node name="Ball6" parent="." instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -640)
+
+[node name="Ball7" parent="." instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -690)
+
+[node name="Ball8" parent="." instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -520)
+
+[node name="Ball9" parent="." instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -548)
+
+[node name="Ball10" parent="." instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -510)
+
+[node name="Ball11" parent="." instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -680)
+
+[node name="Ball12" parent="." instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -500)
+
+[node name="Ball13" parent="." instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -300)
+
+[node name="Ball14" parent="." instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -700)
+
+[node name="Ball15" parent="." instance=ExtResource("10")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 2, -650)
+
+[connection signal="pressed" from="HUD/LevelCompleteUI/Panel/VBox/NextLevelButton" to="HUD/LevelCompleteUI" method="_on_next_level_pressed"]
+[connection signal="pressed" from="HUD/PauseMenu/PausePanel/VBox/ResumeButton" to="HUD/PauseMenu" method="_on_resume_pressed"]
+[connection signal="pressed" from="HUD/PauseMenu/PausePanel/VBox/RestartButton" to="HUD/PauseMenu" method="_on_restart_pressed"]
+[connection signal="pressed" from="HUD/PauseMenu/PausePanel/VBox/MainMenuButton" to="HUD/PauseMenu" method="_on_main_menu_pressed"]

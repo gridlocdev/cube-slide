@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://player"]
+
+[ext_resource type="Script" path="res://scripts/player.gd" id="1"]
+[ext_resource type="AudioStream" path="res://audio/hitSound.wav" id="2"]
+
+[sub_resource type="BoxMesh" id="mesh"]
+size = Vector3(1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="mat"]
+albedo_color = Color(1.0, 0.193, 0.193, 1)
+
+[sub_resource type="BoxShape3D" id="shape"]
+size = Vector3(1, 1, 1)
+
+[sub_resource type="PhysicsMaterial" id="phys_mat"]
+friction = 0.5
+
+[node name="Player" type="RigidBody3D"]
+physics_material_override = SubResource("phys_mat")
+script = ExtResource("1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("mesh")
+material_override = SubResource("mat")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("shape")
+
+[node name="HitSound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2")
