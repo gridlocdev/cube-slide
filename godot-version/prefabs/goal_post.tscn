@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://goalpost"]
+
+[sub_resource type="BoxMesh" id="post_mesh"]
+size = Vector3(2, 10, 2)
+
+[sub_resource type="StandardMaterial3D" id="post_mat"]
+albedo_color = Color(0.266, 0.726, 0.0, 1)
+
+[sub_resource type="BoxShape3D" id="post_shape"]
+size = Vector3(2, 10, 2)
+
+[node name="GoalPost" type="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("post_mesh")
+material_override = SubResource("post_mat")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("post_shape")
