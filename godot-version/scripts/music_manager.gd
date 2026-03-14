@@ -7,11 +7,13 @@ func _ready() -> void:
 	title_player = AudioStreamPlayer.new()
 	title_player.stream = load("res://audio/titleScreen.wav")
 	title_player.bus = "Master"
+	title_player.finished.connect(title_player.play)
 	add_child(title_player)
 
 	game_player = AudioStreamPlayer.new()
 	game_player.stream = load("res://audio/CubeSlideMusic.wav")
 	game_player.bus = "Master"
+	game_player.finished.connect(game_player.play)
 	add_child(game_player)
 
 func play_title_music() -> void:

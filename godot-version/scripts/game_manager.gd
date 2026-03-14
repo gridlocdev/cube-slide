@@ -58,7 +58,7 @@ func load_level_select() -> void:
 	_change_scene("res://scenes/level_select.tscn")
 
 func _change_scene(path: String) -> void:
-	if "level_" in path:
+	if "levels/" in path:
 		MusicManager.play_game_music()
 	else:
 		MusicManager.play_title_music()
