@@ -7,6 +7,7 @@ var _target_node: Node3D
 
 func _ready() -> void:
 	_target_node = get_node(target)
+	fov = 60.0
 
 func _process(_delta: float) -> void:
 	if _target_node:
