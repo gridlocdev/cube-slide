@@ -16,7 +16,6 @@ bounce = 0.0
 
 [node name="Thump" type="RigidBody3D" groups=["thump"]]
 mass = 15.0
-continuous_cd = true
 physics_material_override = SubResource("phys_mat")
 lock_rotation = true
 script = ExtResource("1")

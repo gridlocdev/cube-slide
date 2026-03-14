@@ -3,8 +3,11 @@ extends RigidBody3D
 @export var forward_force := 2000.0
 @export var sideways_force := 125.0
 
+const ACTIVATION_DISTANCE := 100.0
+
 var has_collided := false
 var movement_enabled := true
+var _rigid_bodies: Array[RigidBody3D] = []
 
 @onready var hit_sound: AudioStreamPlayer3D = $HitSound
 
@@ -12,6 +15,11 @@ func _ready() -> void:
 	contact_monitor = true
 	max_contacts_reported = 4
 	body_entered.connect(_on_body_entered)
+	# Collect all non-player RigidBody3D nodes and freeze them
+	for node in get_tree().get_nodes_in_group("obstacle") + get_tree().get_nodes_in_group("thump"):
+		if node is RigidBody3D:
+			node.freeze = true
+			_rigid_bodies.append(node)
 
 func _physics_process(delta: float) -> void:
 	if not movement_enabled:
@@ -29,6 +37,12 @@ func _physics_process(delta: float) -> void:
 	# Fall death
 	if global_position.y < -2.0:
 		GameManager.end_game()
+
+	# Activate/deactivate distant physics bodies
+	var pz := global_position.z
+	for body in _rigid_bodies:
+		var dist := absf(body.global_position.z - pz)
+		body.freeze = dist > ACTIVATION_DISTANCE
 
 func _on_body_entered(body: Node) -> void:
 	if not movement_enabled:
