@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" path="res://prefabs/player.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://prefabs/end_goal.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://prefabs/end_trigger.tscn" id="3"]
 [ext_resource type="Script" path="res://scripts/follow_camera.gd" id="4"]
 [ext_resource type="Script" path="res://scripts/score.gd" id="5"]
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="6"]
@@ -64,9 +63,6 @@ offset = Vector3(0, 3, 8)
 [node name="EndGoal" parent="." instance=ExtResource("2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -550)
 
-[node name="EndTrigger" parent="." instance=ExtResource("3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -559)
-
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="ScoreLabel" type="Label" parent="HUD"]
@@ -79,7 +75,7 @@ text = "0%"
 label_settings = SubResource("score_ls")
 script = ExtResource("5")
 player_path = NodePath("../../Player")
-end_trigger_z = -559.0
+end_trigger_z = -550.0
 
 [node name="LevelCompleteUI" type="Control" parent="HUD"]
 layout_mode = 1

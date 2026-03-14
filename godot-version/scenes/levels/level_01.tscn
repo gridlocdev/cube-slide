@@ -2,7 +2,6 @@
 
 [ext_resource type="PackedScene" uid="uid://player" path="res://prefabs/player.tscn" id="1"]
 [ext_resource type="PackedScene" uid="uid://endgoal" path="res://prefabs/end_goal.tscn" id="2"]
-[ext_resource type="PackedScene" uid="uid://endtrigger" path="res://prefabs/end_trigger.tscn" id="3"]
 [ext_resource type="Script" uid="uid://cix78rfd0oj00" path="res://scripts/follow_camera.gd" id="4"]
 [ext_resource type="Script" uid="uid://bfybjklgn4dkt" path="res://scripts/score.gd" id="5"]
 [ext_resource type="Script" uid="uid://cjfq0jaukq24s" path="res://scripts/pause_menu.gd" id="6"]
@@ -60,9 +59,6 @@ target = NodePath("../Player")
 [node name="EndGoal" parent="." unique_id=432342061 instance=ExtResource("2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -550)
 
-[node name="EndTrigger" parent="." unique_id=1683255936 instance=ExtResource("3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -557)
-
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1740961916]
 
 [node name="ScoreLabel" type="Label" parent="HUD" unique_id=456585458]
@@ -74,7 +70,7 @@ text = "0%"
 label_settings = SubResource("score_ls")
 script = ExtResource("5")
 player_path = NodePath("../../Player")
-end_trigger_z = -557.0
+end_trigger_z = -550.0
 
 [node name="LevelCompleteUI" type="Control" parent="HUD" unique_id=538972338]
 layout_mode = 3
