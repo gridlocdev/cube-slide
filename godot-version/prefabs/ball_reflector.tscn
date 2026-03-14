@@ -5,6 +5,12 @@ size = Vector3(1, 3, 3)
 
 [sub_resource type="StandardMaterial3D" id="mat"]
 albedo_color = Color(0.311, 0.311, 0.311, 1)
+metallic = 0.75
+metallic_specular = 0.6
+roughness = 0.35
+rim_enabled = true
+rim = 0.15
+rim_tint = 0.2
 
 [sub_resource type="BoxShape3D" id="shape"]
 size = Vector3(1, 3, 3)
