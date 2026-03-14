@@ -20,7 +20,7 @@ func _ready() -> void:
 	# Reposition to top center
 	set_anchors_preset(Control.PRESET_TOP_WIDE)
 	offset_left = 0
-	offset_top = 80
+	offset_top = 160
 	offset_right = 0
 	offset_bottom = 280
 
