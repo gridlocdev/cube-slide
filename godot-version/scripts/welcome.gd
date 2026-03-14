@@ -31,6 +31,10 @@ func _on_level_select_pressed() -> void:
 	_click()
 	GameManager.load_level_select()
 
+func _on_controls_pressed() -> void:
+	_click()
+	$ControlsOverlay.show_controls()
+
 func _click() -> void:
 	var player := AudioStreamPlayer.new()
 	player.stream = load("res://audio/menuClick.wav")

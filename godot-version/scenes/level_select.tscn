@@ -1,6 +1,62 @@
 [gd_scene format=3 uid="uid://levelselect"]
 
 [ext_resource type="Script" path="res://scripts/level_select.gd" id="1"]
+[ext_resource type="FontFile" path="res://fonts/Roboto-Light.ttf" id="2"]
+[ext_resource type="FontFile" path="res://fonts/Roboto-Bold.ttf" id="3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tile_normal"]
+bg_color = Color(0.96, 0.96, 0.96, 1)
+border_width_bottom = 2
+border_color = Color(0.75, 0.75, 0.75, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tile_hover"]
+bg_color = Color(1, 1, 1, 1)
+border_width_bottom = 2
+border_color = Color(0.65, 0.65, 0.65, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tile_pressed"]
+bg_color = Color(0.92, 0.92, 0.92, 1)
+border_width_bottom = 2
+border_color = Color(0.6, 0.6, 0.6, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_back_normal"]
+bg_color = Color(0.96, 0.96, 0.96, 1)
+border_width_bottom = 2
+border_color = Color(0.75, 0.75, 0.75, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_back_hover"]
+bg_color = Color(1, 1, 1, 1)
+border_width_bottom = 2
+border_color = Color(0.65, 0.65, 0.65, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_back_pressed"]
+bg_color = Color(0.92, 0.92, 0.92, 1)
+border_width_bottom = 2
+border_color = Color(0.6, 0.6, 0.6, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="LevelSelect" type="Control"]
 layout_mode = 3
@@ -16,107 +72,231 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0.784, 0.784, 0.784, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = -250.0
-offset_right = 200.0
-offset_bottom = 250.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/separation = 5
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+theme_override_constants/margin_left = 80
+theme_override_constants/margin_top = 60
+theme_override_constants/margin_right = 80
+theme_override_constants/margin_bottom = 60
 
-[node name="Title" type="Label" parent="VBoxContainer"]
+[node name="VBox" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-text = "Level Select"
-horizontal_alignment = 1
+theme_override_constants/separation = 40
 
-[node name="GridContainer" type="GridContainer" parent="VBoxContainer"]
+[node name="Header" type="HBoxContainer" parent="MarginContainer/VBox"]
 layout_mode = 2
+theme_override_constants/separation = 20
+alignment = 0
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBox/Header"]
+layout_mode = 2
+custom_minimum_size = Vector2(90, 90)
+theme_override_colors/font_color = Color(0.3, 0.3, 0.3, 1)
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_back_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_back_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_back_pressed")
+text = "←"
+
+[node name="Title" type="Label" parent="MarginContainer/VBox/Header"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.3, 0.3, 0.3, 1)
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 64
+text = "LEVEL SELECT"
+
+[node name="GridCenter" type="CenterContainer" parent="MarginContainer/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBox/GridCenter"]
+layout_mode = 2
+theme_override_constants/h_separation = 24
+theme_override_constants/v_separation = 24
 columns = 5
 
-[node name="Level01" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="Level01" type="Button" parent="MarginContainer/VBox/GridCenter/GridContainer"]
 layout_mode = 2
-text = "1"
+custom_minimum_size = Vector2(150, 150)
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_tile_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tile_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tile_pressed")
+text = "01"
 
-[node name="Level02" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="Level02" type="Button" parent="MarginContainer/VBox/GridCenter/GridContainer"]
 layout_mode = 2
-text = "2"
+custom_minimum_size = Vector2(150, 150)
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_tile_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tile_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tile_pressed")
+text = "02"
 
-[node name="Level03" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="Level03" type="Button" parent="MarginContainer/VBox/GridCenter/GridContainer"]
 layout_mode = 2
-text = "3"
+custom_minimum_size = Vector2(150, 150)
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_tile_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tile_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tile_pressed")
+text = "03"
 
-[node name="Level04" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="Level04" type="Button" parent="MarginContainer/VBox/GridCenter/GridContainer"]
 layout_mode = 2
-text = "4"
+custom_minimum_size = Vector2(150, 150)
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_tile_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tile_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tile_pressed")
+text = "04"
 
-[node name="Level05" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="Level05" type="Button" parent="MarginContainer/VBox/GridCenter/GridContainer"]
 layout_mode = 2
-text = "5"
+custom_minimum_size = Vector2(150, 150)
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_tile_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tile_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tile_pressed")
+text = "05"
 
-[node name="Level06" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="Level06" type="Button" parent="MarginContainer/VBox/GridCenter/GridContainer"]
 layout_mode = 2
-text = "6"
+custom_minimum_size = Vector2(150, 150)
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_tile_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tile_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tile_pressed")
+text = "06"
 
-[node name="Level07" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="Level07" type="Button" parent="MarginContainer/VBox/GridCenter/GridContainer"]
 layout_mode = 2
-text = "7"
+custom_minimum_size = Vector2(150, 150)
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_tile_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tile_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tile_pressed")
+text = "07"
 
-[node name="Level08" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="Level08" type="Button" parent="MarginContainer/VBox/GridCenter/GridContainer"]
 layout_mode = 2
-text = "8"
+custom_minimum_size = Vector2(150, 150)
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_tile_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tile_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tile_pressed")
+text = "08"
 
-[node name="Level09" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="Level09" type="Button" parent="MarginContainer/VBox/GridCenter/GridContainer"]
 layout_mode = 2
-text = "9"
+custom_minimum_size = Vector2(150, 150)
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_tile_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tile_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tile_pressed")
+text = "09"
 
-[node name="Level10" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="Level10" type="Button" parent="MarginContainer/VBox/GridCenter/GridContainer"]
 layout_mode = 2
+custom_minimum_size = Vector2(150, 150)
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_tile_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tile_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tile_pressed")
 text = "10"
 
-[node name="Level11" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="Level11" type="Button" parent="MarginContainer/VBox/GridCenter/GridContainer"]
 layout_mode = 2
+custom_minimum_size = Vector2(150, 150)
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_tile_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tile_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tile_pressed")
 text = "11"
 
-[node name="Level12" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="Level12" type="Button" parent="MarginContainer/VBox/GridCenter/GridContainer"]
 layout_mode = 2
+custom_minimum_size = Vector2(150, 150)
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_tile_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tile_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tile_pressed")
 text = "12"
 
-[node name="Level13" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="Level13" type="Button" parent="MarginContainer/VBox/GridCenter/GridContainer"]
 layout_mode = 2
+custom_minimum_size = Vector2(150, 150)
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_tile_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tile_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tile_pressed")
 text = "13"
 
-[node name="Level14" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="Level14" type="Button" parent="MarginContainer/VBox/GridCenter/GridContainer"]
 layout_mode = 2
+custom_minimum_size = Vector2(150, 150)
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_tile_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tile_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tile_pressed")
 text = "14"
 
-[node name="Level15" type="Button" parent="VBoxContainer/GridContainer"]
+[node name="Level15" type="Button" parent="MarginContainer/VBox/GridCenter/GridContainer"]
 layout_mode = 2
+custom_minimum_size = Vector2(150, 150)
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_tile_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_tile_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_tile_pressed")
 text = "15"
 
-[node name="BackButton" type="Button" parent="VBoxContainer"]
-layout_mode = 2
-text = "Back"
-
-[connection signal="pressed" from="VBoxContainer/GridContainer/Level01" to="." method="_load_level" binds= [1]]
-[connection signal="pressed" from="VBoxContainer/GridContainer/Level02" to="." method="_load_level" binds= [2]]
-[connection signal="pressed" from="VBoxContainer/GridContainer/Level03" to="." method="_load_level" binds= [3]]
-[connection signal="pressed" from="VBoxContainer/GridContainer/Level04" to="." method="_load_level" binds= [4]]
-[connection signal="pressed" from="VBoxContainer/GridContainer/Level05" to="." method="_load_level" binds= [5]]
-[connection signal="pressed" from="VBoxContainer/GridContainer/Level06" to="." method="_load_level" binds= [6]]
-[connection signal="pressed" from="VBoxContainer/GridContainer/Level07" to="." method="_load_level" binds= [7]]
-[connection signal="pressed" from="VBoxContainer/GridContainer/Level08" to="." method="_load_level" binds= [8]]
-[connection signal="pressed" from="VBoxContainer/GridContainer/Level09" to="." method="_load_level" binds= [9]]
-[connection signal="pressed" from="VBoxContainer/GridContainer/Level10" to="." method="_load_level" binds= [10]]
-[connection signal="pressed" from="VBoxContainer/GridContainer/Level11" to="." method="_load_level" binds= [11]]
-[connection signal="pressed" from="VBoxContainer/GridContainer/Level12" to="." method="_load_level" binds= [12]]
-[connection signal="pressed" from="VBoxContainer/GridContainer/Level13" to="." method="_load_level" binds= [13]]
-[connection signal="pressed" from="VBoxContainer/GridContainer/Level14" to="." method="_load_level" binds= [14]]
-[connection signal="pressed" from="VBoxContainer/GridContainer/Level15" to="." method="_load_level" binds= [15]]
-[connection signal="pressed" from="VBoxContainer/BackButton" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="MarginContainer/VBox/Header/BackButton" to="." method="_on_back_pressed"]
+[connection signal="pressed" from="MarginContainer/VBox/GridCenter/GridContainer/Level01" to="." method="_load_level" binds= [1]]
+[connection signal="pressed" from="MarginContainer/VBox/GridCenter/GridContainer/Level02" to="." method="_load_level" binds= [2]]
+[connection signal="pressed" from="MarginContainer/VBox/GridCenter/GridContainer/Level03" to="." method="_load_level" binds= [3]]
+[connection signal="pressed" from="MarginContainer/VBox/GridCenter/GridContainer/Level04" to="." method="_load_level" binds= [4]]
+[connection signal="pressed" from="MarginContainer/VBox/GridCenter/GridContainer/Level05" to="." method="_load_level" binds= [5]]
+[connection signal="pressed" from="MarginContainer/VBox/GridCenter/GridContainer/Level06" to="." method="_load_level" binds= [6]]
+[connection signal="pressed" from="MarginContainer/VBox/GridCenter/GridContainer/Level07" to="." method="_load_level" binds= [7]]
+[connection signal="pressed" from="MarginContainer/VBox/GridCenter/GridContainer/Level08" to="." method="_load_level" binds= [8]]
+[connection signal="pressed" from="MarginContainer/VBox/GridCenter/GridContainer/Level09" to="." method="_load_level" binds= [9]]
+[connection signal="pressed" from="MarginContainer/VBox/GridCenter/GridContainer/Level10" to="." method="_load_level" binds= [10]]
+[connection signal="pressed" from="MarginContainer/VBox/GridCenter/GridContainer/Level11" to="." method="_load_level" binds= [11]]
+[connection signal="pressed" from="MarginContainer/VBox/GridCenter/GridContainer/Level12" to="." method="_load_level" binds= [12]]
+[connection signal="pressed" from="MarginContainer/VBox/GridCenter/GridContainer/Level13" to="." method="_load_level" binds= [13]]
+[connection signal="pressed" from="MarginContainer/VBox/GridCenter/GridContainer/Level14" to="." method="_load_level" binds= [14]]
+[connection signal="pressed" from="MarginContainer/VBox/GridCenter/GridContainer/Level15" to="." method="_load_level" binds= [15]]

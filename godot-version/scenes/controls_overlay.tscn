@@ -1,0 +1,209 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://scripts/controls_overlay.gd" id="1"]
+[ext_resource type="FontFile" path="res://fonts/Roboto-Bold.ttf" id="2"]
+[ext_resource type="FontFile" path="res://fonts/Roboto-Light.ttf" id="3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_key"]
+bg_color = Color(1, 1, 1, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.4, 0.4, 0.4, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+content_margin_left = 20.0
+content_margin_top = 14.0
+content_margin_right = 20.0
+content_margin_bottom = 14.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_close_normal"]
+bg_color = Color(1, 1, 1, 1)
+border_width_bottom = 2
+border_color = Color(0.7, 0.7, 0.7, 1)
+content_margin_left = 40.0
+content_margin_top = 16.0
+content_margin_right = 40.0
+content_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_close_hover"]
+bg_color = Color(0.95, 0.95, 0.95, 1)
+border_width_bottom = 2
+border_color = Color(0.6, 0.6, 0.6, 1)
+content_margin_left = 40.0
+content_margin_top = 16.0
+content_margin_right = 40.0
+content_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_close_pressed"]
+bg_color = Color(0.9, 0.9, 0.9, 1)
+border_width_bottom = 2
+border_color = Color(0.5, 0.5, 0.5, 1)
+content_margin_left = 40.0
+content_margin_top = 16.0
+content_margin_right = 40.0
+content_margin_bottom = 16.0
+
+[node name="ControlsOverlay" type="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("1")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.784, 0.784, 0.784, 1)
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="VBox" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="Title" type="Label" parent="CenterContainer/VBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 64
+text = "CONTROLS"
+horizontal_alignment = 1
+
+[node name="MovementSection" type="VBoxContainer" parent="CenterContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="MovementLabel" type="Label" parent="CenterContainer/VBox/MovementSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.35, 0.35, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 28
+text = "MOVEMENT"
+horizontal_alignment = 1
+
+[node name="KeyRow" type="HBoxContainer" parent="CenterContainer/VBox/MovementSection"]
+layout_mode = 2
+alignment = 1
+theme_override_constants/separation = 30
+
+[node name="AKeyContainer" type="VBoxContainer" parent="CenterContainer/VBox/MovementSection/KeyRow"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="AKey" type="PanelContainer" parent="CenterContainer/VBox/MovementSection/KeyRow/AKeyContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_key")
+
+[node name="ALabel" type="Label" parent="CenterContainer/VBox/MovementSection/KeyRow/AKeyContainer/AKey"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 36
+text = "A"
+horizontal_alignment = 1
+
+[node name="LeftLabel" type="Label" parent="CenterContainer/VBox/MovementSection/KeyRow/AKeyContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 20
+text = "Move Left"
+horizontal_alignment = 1
+
+[node name="ArrowLabel" type="Label" parent="CenterContainer/VBox/MovementSection/KeyRow"]
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 36
+text = "<    >"
+horizontal_alignment = 1
+
+[node name="DKeyContainer" type="VBoxContainer" parent="CenterContainer/VBox/MovementSection/KeyRow"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="DKey" type="PanelContainer" parent="CenterContainer/VBox/MovementSection/KeyRow/DKeyContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_key")
+
+[node name="DLabel" type="Label" parent="CenterContainer/VBox/MovementSection/KeyRow/DKeyContainer/DKey"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 36
+text = "D"
+horizontal_alignment = 1
+
+[node name="RightLabel" type="Label" parent="CenterContainer/VBox/MovementSection/KeyRow/DKeyContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 20
+text = "Move Right"
+horizontal_alignment = 1
+
+[node name="PauseSection" type="VBoxContainer" parent="CenterContainer/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="PauseLabel" type="Label" parent="CenterContainer/VBox/PauseSection"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.35, 0.35, 0.35, 1)
+theme_override_fonts/font = ExtResource("3")
+theme_override_font_sizes/font_size = 28
+text = "PAUSE"
+horizontal_alignment = 1
+
+[node name="EscKeyCenter" type="HBoxContainer" parent="CenterContainer/VBox/PauseSection"]
+layout_mode = 2
+alignment = 1
+
+[node name="EscKeyContainer" type="VBoxContainer" parent="CenterContainer/VBox/PauseSection/EscKeyCenter"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="EscKey" type="PanelContainer" parent="CenterContainer/VBox/PauseSection/EscKeyCenter/EscKeyContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_key")
+
+[node name="EscLabel" type="Label" parent="CenterContainer/VBox/PauseSection/EscKeyCenter/EscKeyContainer/EscKey"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 36
+text = "ESC"
+horizontal_alignment = 1
+
+[node name="PauseDescLabel" type="Label" parent="CenterContainer/VBox/PauseSection/EscKeyCenter/EscKeyContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4, 0.4, 0.4, 1)
+theme_override_font_sizes/font_size = 20
+text = "Pause Game"
+horizontal_alignment = 1
+
+[node name="CloseButton" type="Button" parent="CenterContainer/VBox"]
+layout_mode = 2
+size_flags_horizontal = 4
+custom_minimum_size = Vector2(200, 0)
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_colors/font_hover_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_colors/font_pressed_color = Color(0.0, 0.0, 0.0, 1)
+theme_override_font_sizes/font_size = 24
+theme_override_styles/normal = SubResource("StyleBoxFlat_close_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_close_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_close_pressed")
+text = "CLOSE"
+
+[connection signal="pressed" from="CenterContainer/VBox/CloseButton" to="." method="_on_close_pressed"]

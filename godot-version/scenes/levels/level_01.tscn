@@ -1,22 +1,13 @@
-[gd_scene load_steps=15 format=3]
+[gd_scene format=3 uid="uid://djbjudu1k07k2"]
 
-[ext_resource type="PackedScene" path="res://prefabs/player.tscn" id="1"]
-[ext_resource type="PackedScene" path="res://prefabs/end_goal.tscn" id="2"]
-[ext_resource type="PackedScene" path="res://prefabs/end_trigger.tscn" id="3"]
-[ext_resource type="Script" path="res://scripts/follow_camera.gd" id="4"]
-[ext_resource type="Script" path="res://scripts/score.gd" id="5"]
-[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="6"]
-[ext_resource type="Script" path="res://scripts/level_complete_ui.gd" id="7"]
-[ext_resource type="PackedScene" path="res://prefabs/obstacle.tscn" id="8"]
-
-[sub_resource type="BoxMesh" id="ground_mesh"]
-size = Vector3(15, 1, 10000)
-
-[sub_resource type="StandardMaterial3D" id="ground_mat"]
-albedo_color = Color(1, 1, 1, 1)
-
-[sub_resource type="BoxShape3D" id="ground_shape"]
-size = Vector3(15, 1, 10000)
+[ext_resource type="PackedScene" uid="uid://player" path="res://prefabs/player.tscn" id="1"]
+[ext_resource type="PackedScene" uid="uid://endgoal" path="res://prefabs/end_goal.tscn" id="2"]
+[ext_resource type="PackedScene" uid="uid://endtrigger" path="res://prefabs/end_trigger.tscn" id="3"]
+[ext_resource type="Script" uid="uid://cix78rfd0oj00" path="res://scripts/follow_camera.gd" id="4"]
+[ext_resource type="Script" uid="uid://bfybjklgn4dkt" path="res://scripts/score.gd" id="5"]
+[ext_resource type="Script" uid="uid://cjfq0jaukq24s" path="res://scripts/pause_menu.gd" id="6"]
+[ext_resource type="Script" uid="uid://f6pm03e0e6kh" path="res://scripts/level_complete_ui.gd" id="7"]
+[ext_resource type="PackedScene" uid="uid://obstacle" path="res://prefabs/obstacle.tscn" id="8"]
 
 [sub_resource type="Environment" id="env"]
 background_mode = 1
@@ -24,6 +15,14 @@ background_color = Color(0.784, 0.784, 0.784, 1)
 fog_enabled = true
 fog_light_color = Color(0.784, 0.784, 0.784, 1)
 fog_density = 0.005
+
+[sub_resource type="StandardMaterial3D" id="ground_mat"]
+
+[sub_resource type="BoxMesh" id="ground_mesh"]
+size = Vector3(15, 1, 10000)
+
+[sub_resource type="BoxShape3D" id="ground_shape"]
+size = Vector3(15, 1, 10000)
 
 [sub_resource type="LabelSettings" id="score_ls"]
 font_size = 32
@@ -33,42 +32,40 @@ font_color = Color(0.1, 0.1, 0.1, 1)
 font_size = 48
 font_color = Color(0.1, 0.1, 0.1, 1)
 
-[node name="Level01" type="Node3D"]
+[node name="Level01" type="Node3D" unique_id=528148821]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=935314646]
 environment = SubResource("env")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=40441658]
 transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, 0, 10, 10)
 
-[node name="Ground" type="StaticBody3D" parent="."]
+[node name="Ground" type="StaticBody3D" parent="." unique_id=1433775169]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, -4980)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground"]
-mesh = SubResource("ground_mesh")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ground" unique_id=1721110622]
 material_override = SubResource("ground_mat")
+mesh = SubResource("ground_mesh")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground" unique_id=1048666296]
 shape = SubResource("ground_shape")
 
-[node name="Player" parent="." instance=ExtResource("1")]
+[node name="Player" parent="." unique_id=601245740 instance=ExtResource("1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." unique_id=1832221905]
 script = ExtResource("4")
 target = NodePath("../Player")
-offset = Vector3(0, 3, 8)
 
-[node name="EndGoal" parent="." instance=ExtResource("2")]
+[node name="EndGoal" parent="." unique_id=432342061 instance=ExtResource("2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -550)
 
-[node name="EndTrigger" parent="." instance=ExtResource("3")]
+[node name="EndTrigger" parent="." unique_id=1683255936 instance=ExtResource("3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, -557)
 
-[node name="HUD" type="CanvasLayer" parent="."]
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1740961916]
 
-[node name="ScoreLabel" type="Label" parent="HUD"]
-anchors_preset = 0
+[node name="ScoreLabel" type="Label" parent="HUD" unique_id=456585458]
 offset_left = 20.0
 offset_top = 20.0
 offset_right = 200.0
@@ -79,14 +76,16 @@ script = ExtResource("5")
 player_path = NodePath("../../Player")
 end_trigger_z = -557.0
 
-[node name="LevelCompleteUI" type="Control" parent="HUD"]
-layout_mode = 1
+[node name="LevelCompleteUI" type="Control" parent="HUD" unique_id=538972338]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("7")
 
-[node name="Panel" type="Panel" parent="HUD/LevelCompleteUI"]
+[node name="Panel" type="Panel" parent="HUD/LevelCompleteUI" unique_id=1368054990]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -100,7 +99,7 @@ offset_bottom = 80.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBox" type="VBoxContainer" parent="HUD/LevelCompleteUI/Panel"]
+[node name="VBox" type="VBoxContainer" parent="HUD/LevelCompleteUI/Panel" unique_id=582780011]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -109,26 +108,30 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = -10.0
 offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 15
 
-[node name="Label" type="Label" parent="HUD/LevelCompleteUI/Panel/VBox"]
+[node name="Label" type="Label" parent="HUD/LevelCompleteUI/Panel/VBox" unique_id=2017944384]
 layout_mode = 2
 text = "Level Complete!"
 label_settings = SubResource("lc_ls")
 horizontal_alignment = 1
 
-[node name="NextLevelButton" type="Button" parent="HUD/LevelCompleteUI/Panel/VBox"]
+[node name="NextLevelButton" type="Button" parent="HUD/LevelCompleteUI/Panel/VBox" unique_id=667312105]
 layout_mode = 2
 text = "Next Level"
 
-[node name="PauseMenu" type="Control" parent="HUD"]
-layout_mode = 1
+[node name="PauseMenu" type="Control" parent="HUD" unique_id=2088486598]
+layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("6")
 
-[node name="PausePanel" type="Panel" parent="HUD/PauseMenu"]
+[node name="PausePanel" type="Panel" parent="HUD/PauseMenu" unique_id=778953260]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -142,7 +145,7 @@ offset_bottom = 100.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBox" type="VBoxContainer" parent="HUD/PauseMenu/PausePanel"]
+[node name="VBox" type="VBoxContainer" parent="HUD/PauseMenu/PausePanel" unique_id=494972644]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -151,41 +154,43 @@ offset_left = 10.0
 offset_top = 10.0
 offset_right = -10.0
 offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
 theme_override_constants/separation = 10
 
-[node name="PausedLabel" type="Label" parent="HUD/PauseMenu/PausePanel/VBox"]
+[node name="PausedLabel" type="Label" parent="HUD/PauseMenu/PausePanel/VBox" unique_id=273300505]
 layout_mode = 2
 text = "Paused"
 horizontal_alignment = 1
 
-[node name="ResumeButton" type="Button" parent="HUD/PauseMenu/PausePanel/VBox"]
+[node name="ResumeButton" type="Button" parent="HUD/PauseMenu/PausePanel/VBox" unique_id=1567725203]
 layout_mode = 2
 text = "Resume"
 
-[node name="RestartButton" type="Button" parent="HUD/PauseMenu/PausePanel/VBox"]
+[node name="RestartButton" type="Button" parent="HUD/PauseMenu/PausePanel/VBox" unique_id=2000208683]
 layout_mode = 2
 text = "Restart"
 
-[node name="MainMenuButton" type="Button" parent="HUD/PauseMenu/PausePanel/VBox"]
+[node name="MainMenuButton" type="Button" parent="HUD/PauseMenu/PausePanel/VBox" unique_id=268320871]
 layout_mode = 2
 text = "Main Menu"
 
-[node name="Obstacle1" parent="." instance=ExtResource("8")]
+[node name="Obstacle1" parent="." unique_id=296590869 instance=ExtResource("8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 1, -250)
 
-[node name="Obstacle2" parent="." instance=ExtResource("8")]
+[node name="Obstacle2" parent="." unique_id=1697156012 instance=ExtResource("8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1, -400)
 
-[node name="Obstacle3" parent="." instance=ExtResource("8")]
+[node name="Obstacle3" parent="." unique_id=447523866 instance=ExtResource("8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1, -250)
 
-[node name="Obstacle4" parent="." instance=ExtResource("8")]
+[node name="Obstacle4" parent="." unique_id=626384124 instance=ExtResource("8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 1, -400)
 
-[node name="Obstacle5" parent="." instance=ExtResource("8")]
+[node name="Obstacle5" parent="." unique_id=762966721 instance=ExtResource("8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1, -100)
 
-[node name="Obstacle6" parent="." instance=ExtResource("8")]
+[node name="Obstacle6" parent="." unique_id=616905555 instance=ExtResource("8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 1, -100)
 
 [connection signal="pressed" from="HUD/LevelCompleteUI/Panel/VBox/NextLevelButton" to="HUD/LevelCompleteUI" method="_on_next_level_pressed"]
