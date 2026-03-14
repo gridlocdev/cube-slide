@@ -1,6 +1,6 @@
 extends RigidBody3D
 
-@export var forward_force := 8000.0
+@export var forward_force := 4000.0
 @export var sideways_force := 125.0
 
 var has_collided := false
