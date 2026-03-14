@@ -9,10 +9,10 @@ size = Vector3(15, 10, 6)
 [node name="EndGoal" type="Node3D"]
 
 [node name="PillarLeft" parent="." instance=ExtResource("1_goalpost")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 6, 0)
 
 [node name="PillarRight" parent="." instance=ExtResource("1_goalpost")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.5, 5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 6, 0)
 
 [node name="EndTrigger" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5, 0)
