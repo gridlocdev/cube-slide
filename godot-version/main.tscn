@@ -1,0 +1,111 @@
+[gd_scene format=3 uid="uid://main"]
+
+[ext_resource type="Script" path="res://player.gd" id="1"]
+
+[sub_resource type="BoxMesh" id="platform_mesh"]
+size = Vector3(4, 0.5, 200)
+
+[sub_resource type="StandardMaterial3D" id="platform_mat"]
+albedo_color = Color(1, 1, 1, 1)
+
+[sub_resource type="BoxShape3D" id="platform_shape"]
+size = Vector3(4, 0.5, 200)
+
+[sub_resource type="BoxMesh" id="player_mesh"]
+size = Vector3(1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="player_mat"]
+albedo_color = Color(0.9, 0.1, 0.1, 1)
+
+[sub_resource type="BoxShape3D" id="player_shape"]
+size = Vector3(1, 1, 1)
+
+[sub_resource type="BoxMesh" id="pillar_mesh"]
+size = Vector3(0.5, 4, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="pillar_mat"]
+albedo_color = Color(0.1, 0.8, 0.1, 1)
+
+[sub_resource type="BoxShape3D" id="goal_area_shape"]
+size = Vector3(4, 4, 1)
+
+[sub_resource type="Environment" id="env"]
+background_mode = 1
+background_color = Color(0.5, 0.5, 0.5, 1)
+fog_enabled = true
+fog_light_color = Color(0.5, 0.5, 0.5, 1)
+fog_density = 0.02
+
+[sub_resource type="LabelSettings" id="label_settings"]
+font_size = 72
+font_color = Color(0.35, 0.35, 0.35, 1)
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("env")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707, 0.707, 0, -0.707, 0.707, 0, 10, 10)
+
+[node name="Platform" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, -100)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Platform"]
+mesh = SubResource("platform_mesh")
+material_override = SubResource("platform_mat")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Platform"]
+shape = SubResource("platform_shape")
+
+[node name="Player" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("1")
+goal_z = -195.0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player"]
+mesh = SubResource("player_mesh")
+material_override = SubResource("player_mat")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Player"]
+shape = SubResource("player_shape")
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 0.94, 0.34, 0, -0.34, 0.94, 0, 1.8, 3.5)
+
+[node name="PillarLeft" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 2, -195)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PillarLeft"]
+mesh = SubResource("pillar_mesh")
+material_override = SubResource("pillar_mat")
+
+[node name="PillarRight" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 2, -195)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PillarRight"]
+mesh = SubResource("pillar_mesh")
+material_override = SubResource("pillar_mat")
+
+[node name="GoalArea" type="Area3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -195)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="GoalArea"]
+shape = SubResource("goal_area_shape")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="HUDLabel" type="Label" parent="HUD"]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -200.0
+offset_top = 80.0
+offset_right = 200.0
+offset_bottom = 180.0
+grow_horizontal = 2
+text = "0%"
+label_settings = SubResource("label_settings")
+horizontal_alignment = 1
