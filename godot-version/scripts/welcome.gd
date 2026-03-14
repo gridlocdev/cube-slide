@@ -6,6 +6,8 @@ const HOVER_DURATION := 0.15
 
 func _ready() -> void:
 	MusicManager.play_title_music()
+	if OS.has_feature("web"):
+		%ExitButton.hide()
 	for button: Button in [%StartButton, %LevelSelectButton]:
 		_setup_button_hover(button)
 
@@ -34,6 +36,10 @@ func _on_level_select_pressed() -> void:
 func _on_controls_pressed() -> void:
 	_click()
 	$ControlsOverlay.show_controls()
+
+func _on_exit_pressed() -> void:
+	_click()
+	get_tree().quit()
 
 func _click() -> void:
 	var player := AudioStreamPlayer.new()

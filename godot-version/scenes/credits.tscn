@@ -69,20 +69,19 @@ theme_override_constants/separation = 10
 
 [node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.3, 0.3, 0.3, 1)
-theme_override_fonts/font = ExtResource("2")
+theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
+theme_override_fonts/font = ExtResource("3")
 theme_override_font_sizes/font_size = 72
-text = "CREDITS"
+text = "GAME COMPLETE!"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="CreditsText" type="Label" parent="CenterContainer/VBoxContainer"]
+[node name="Subtitle" type="Label" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.25, 0.25, 0.25, 1)
-theme_override_fonts/font = ExtResource("3")
-theme_override_font_sizes/font_size = 48
-text = "Cube Slide
-by gridlocdev"
+theme_override_colors/font_color = Color(0.3, 0.3, 0.3, 1)
+theme_override_fonts/font = ExtResource("2")
+theme_override_font_sizes/font_size = 36
+text = "Think you can handle the bonus levels?"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -90,26 +89,10 @@ vertical_alignment = 1
 layout_mode = 2
 custom_minimum_size = Vector2(0, 40)
 
-[node name="HBoxContainer" type="HBoxContainer" parent="CenterContainer/VBoxContainer"]
+[node name="BonusButton" type="Button" parent="CenterContainer/VBoxContainer"]
 layout_mode = 2
+custom_minimum_size = Vector2(280, 0)
 size_flags_horizontal = 4
-theme_override_constants/separation = 20
-
-[node name="ExitButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-custom_minimum_size = Vector2(280, 0)
-theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
-theme_override_colors/font_hover_color = Color(0.1, 0.1, 0.1, 1)
-theme_override_colors/font_pressed_color = Color(0.0, 0.0, 0.0, 1)
-theme_override_font_sizes/font_size = 28
-theme_override_styles/normal = SubResource("StyleBoxFlat_normal")
-theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
-text = "EXIT GAME"
-
-[node name="BonusButton" type="Button" parent="CenterContainer/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-custom_minimum_size = Vector2(280, 0)
 theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
 theme_override_colors/font_hover_color = Color(0.1, 0.1, 0.1, 1)
 theme_override_colors/font_pressed_color = Color(0.0, 0.0, 0.0, 1)
@@ -119,5 +102,22 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
 theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
 text = "BONUS LEVELS"
 
-[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/ExitButton" to="." method="_on_exit_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/HBoxContainer/BonusButton" to="." method="_on_bonus_pressed"]
+[node name="Spacer2" type="Control" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 20)
+
+[node name="MenuButton" type="Button" parent="CenterContainer/VBoxContainer"]
+layout_mode = 2
+custom_minimum_size = Vector2(280, 0)
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.2, 0.2, 0.2, 1)
+theme_override_colors/font_hover_color = Color(0.1, 0.1, 0.1, 1)
+theme_override_colors/font_pressed_color = Color(0.0, 0.0, 0.0, 1)
+theme_override_font_sizes/font_size = 28
+theme_override_styles/normal = SubResource("StyleBoxFlat_normal")
+theme_override_styles/hover = SubResource("StyleBoxFlat_hover")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_pressed")
+text = "RETURN TO MENU"
+
+[connection signal="pressed" from="CenterContainer/VBoxContainer/BonusButton" to="." method="_on_bonus_pressed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/MenuButton" to="." method="_on_menu_pressed"]
