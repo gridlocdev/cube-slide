@@ -15,8 +15,9 @@ func _ready() -> void:
 	contact_monitor = true
 	max_contacts_reported = 4
 	body_entered.connect(_on_body_entered)
-	# Collect all non-player RigidBody3D nodes and freeze them
-	for node in get_tree().get_nodes_in_group("obstacle") + get_tree().get_nodes_in_group("thump"):
+	# Collect non-player RigidBody3D obstacle nodes and freeze them
+	# (thumps manage their own freeze state for animation)
+	for node in get_tree().get_nodes_in_group("obstacle"):
 		if node is RigidBody3D:
 			node.freeze = true
 			_rigid_bodies.append(node)
