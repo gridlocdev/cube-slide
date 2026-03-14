@@ -18,7 +18,7 @@ func _ready() -> void:
 	# Collect non-player RigidBody3D obstacle nodes and freeze them
 	# (thumps manage their own freeze state for animation)
 	for node in get_tree().get_nodes_in_group("obstacle"):
-		if node is RigidBody3D:
+		if node is RigidBody3D and not node.is_in_group("ball"):
 			node.freeze = true
 			_rigid_bodies.append(node)
 
