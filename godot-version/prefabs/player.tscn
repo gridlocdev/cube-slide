@@ -17,6 +17,7 @@ friction = 0.5
 
 [node name="Player" type="RigidBody3D"]
 physics_material_override = SubResource("phys_mat")
+continuous_cd = true
 script = ExtResource("1")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
