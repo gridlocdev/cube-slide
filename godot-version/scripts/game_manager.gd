@@ -26,6 +26,31 @@ const LEVELS: Array[String] = [
 var game_has_ended := false
 var restart_delay := 1.0
 
+func _ready() -> void:
+	for arg in OS.get_cmdline_user_args():
+		if arg.begins_with("--scene="):
+			var value := arg.substr("--scene=".length())
+			var path := _resolve_scene(value)
+			if path != "":
+				call_deferred("_change_scene", path)
+				return
+			else:
+				push_warning("Unknown scene: " + value)
+
+func _resolve_scene(value: String) -> String:
+	# Try as a level number (e.g. "5" -> level_05)
+	if value.is_valid_int():
+		var num := value.to_int()
+		var padded := "level_%02d" % num
+		for level in LEVELS:
+			if padded in level:
+				return level
+	# Try as a scene name (e.g. "credits", "credits_bonus", "welcome", "level_select")
+	for level in LEVELS:
+		if value in level:
+			return level
+	return ""
+
 func end_game() -> void:
 	if game_has_ended:
 		return
