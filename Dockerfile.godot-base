@@ -1,0 +1,21 @@
+FROM debian:bookworm-slim
+
+ARG GODOT_VERSION=4.6
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    wget unzip ca-certificates \
+    && rm -rf /var/lib/apt/lists/*
+
+# Download Godot headless editor
+RUN wget -q "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_linux.x86_64.zip" -O /tmp/godot.zip \
+    && unzip /tmp/godot.zip -d /tmp \
+    && mv /tmp/Godot_v${GODOT_VERSION}-stable_linux.x86_64 /usr/local/bin/godot \
+    && chmod +x /usr/local/bin/godot \
+    && rm /tmp/godot.zip
+
+# Download & install export templates
+RUN wget -q "https://github.com/godotengine/godot/releases/download/${GODOT_VERSION}-stable/Godot_v${GODOT_VERSION}-stable_export_templates.tpz" -O /tmp/templates.tpz \
+    && unzip /tmp/templates.tpz -d /tmp/templates \
+    && mkdir -p /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable \
+    && mv /tmp/templates/templates/* /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable/ \
+    && rm -rf /tmp/templates /tmp/templates.tpz
