@@ -1,21 +1,29 @@
 # Cube Slide
 
-A 3D puzzle game built with Godot 4.6.
+A simple platformer game where you slide a cube around to reach the goal. Made with Godot Engine.
+
+![Gameplay Preview](CubeSlidePreview.gif)
 
 ## Web Export
 
-Export the game for web using the Godot CLI:
+Create a web build with the Godot CLI:
 
 ```sh
 godot --headless --export-release "Web" build/web/index.html
 ```
 
-## Running Locally
+The output will be placed in build/web/.
 
-Serve the exported build with the required CORS headers:
+## Preview Locally
+
+Serve the exported site (with proper CORS headers) to test in a browser:
 
 ```sh
 python3 serve.py --root build/web
 ```
 
-This opens `http://127.0.0.1:8060` in your browser. Use `--no-browser` to disable auto-open, or `--port <N>` to change the port.
+Defaults to http://127.0.0.1:8060. Useful options:
+- `--no-browser` — don't auto-open the page  
+- `--port <N>` — choose a different port
+
+If you see CORS or MIME errors, check the server script and clear the browser cache.
