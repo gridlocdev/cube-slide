@@ -18,9 +18,9 @@ const LEVELS: Array[String] = [
 	"res://scenes/credits.tscn",       # 13
 	"res://scenes/levels/level_13.tscn", # 14
 	"res://scenes/levels/level_14.tscn", # 15
-	"res://scenes/credits_bonus.tscn", # 16
-	"res://scenes/level_select.tscn",  # 17
-	"res://scenes/levels/level_15.tscn", # 18
+	"res://scenes/levels/level_15.tscn", # 16
+	"res://scenes/credits_bonus.tscn", # 17
+	"res://scenes/level_select.tscn",  # 18
 ]
 
 var game_has_ended := false
